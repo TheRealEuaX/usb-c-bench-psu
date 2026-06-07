@@ -1,0 +1,24 @@
+USB-C Bench PSU - Change Log
+=============================
+
+All notable changes to this hardware design are documented in this file,
+as required by CERN-OHL-S v2 section 3.3(b).
+
+2026-06-06: v1.0 (Initial Release)
+  - Initial open-source release of USB-C Bench PSU
+  - TPS563201 synchronous buck converter, 3.3V regulated output
+  - 5V passthrough from USB-C VBUS
+  - AO3401A P-channel MOSFET output switching via SPDT slide switch
+  - PTC fuse input protection, SMF5.0AT1G TVS on output rails
+  - White/Red LED rail indicators
+  - Designed in Altium Designer
+  - PCB fabricated at JLCPCB, components sourced from LCSC
+
+Known Limitations (v1.0):
+  - Q1 body diode forward-biases when 5V mode is active, holding the
+    3.3V regulator output node at ~4.3V. Switching from 5V to 3.3V
+    with a live load will expose the load to ~4.3V momentarily.
+    Disconnect loads before switching. Fix planned for v1.1 using
+    back-to-back MOSFETs.
+  - Feedback divider senses pre-MOSFET voltage; output voltage under
+    load is reduced by MOSFET Rds(on) drop (unregulated).

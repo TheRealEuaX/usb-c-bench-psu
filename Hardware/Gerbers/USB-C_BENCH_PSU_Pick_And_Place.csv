@@ -1,0 +1,40 @@
+Altium Designer Pick and Place Locations
+C:\Users\Public\Documents\Altium\USB-C_BENCH_PSU\Project Outputs for USB-C_BENCH_PSU\Pick Place for USB-C_BENCH_PSU.csv
+
+========================================================================================================================
+File Design Information:
+
+Date:       07/06/26
+Time:       17:04
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mm
+
+"Designator","Comment","Layer","Footprint","Center-X(mm)","Center-Y(mm)","Rotation","Description"
+"IC1","TI TPS563201DDCR","TopLayer","TI_TPS563201DDCR","171.8250mm","40.5500mm","0",""
+"F1","F1206","TopLayer","FUSE_1206","169.9750mm","34.8250mm","180","Fuse PPTC SMD 1206"
+"S1","SS12D07VG4","TopLayer","SW_SS12D07VG4","157.2750mm","37.5000mm","90","Switch Slide ON ON SPDT Top Slide 0.3A 30VDC PC Pins Bracket Mount/Through Hole Automotive Bulk"
+"R6","100k","TopLayer","RES_0402","162.6500mm","31.5500mm","0","Resistor SMD 0402"
+"R7","100k","TopLayer","RES_0402","162.7000mm","36.5000mm","0","Resistor SMD 0402"
+"R9","220R","TopLayer","RES_0402","165.0750mm","41.4500mm","0","Resistor SMD 0402"
+"R8","330R","TopLayer","RES_0402","165.2750mm","29.8250mm","90","Resistor SMD 0402"
+"R5","10k","TopLayer","RES_0402","174.0250mm","37.5500mm","90","Resistor SMD 0402"
+"R4","33.2k","TopLayer","RES_0402","175.4750mm","37.5500mm","270","Resistor SMD 0402"
+"R3","100k","TopLayer","RES_0402","175.1750mm","39.9250mm","0","Resistor SMD 0402"
+"R2","5.1k","TopLayer","RES_0402","175.4750mm","34.7500mm","270","Resistor SMD 0402"
+"R1","5.1k","TopLayer","RES_0402","174.0250mm","34.7500mm","270","Resistor SMD 0402"
+"Q1","AO3401A","TopLayer","FP-SOT23-IPC_B","161.7500mm","34.1250mm","180","MOSFET P-CH 30V SOT23"
+"Q2","AO3401A","TopLayer","FP-SOT23-IPC_B","161.7250mm","38.8750mm","180","MOSFET P-CH 30V SOT23"
+"L1","3.3uH","TopLayer","IND_1008","168.0250mm","39.6500mm","90","Inductor SMD 1008"
+"JMP1","Jumper","TopLayer","JMP2_TH","157.0000mm","29.1250mm","90","Jumper 2 Pins Through-Hole DO NOT PLACE"
+"J1","217175-0001","TopLayer","FP-217175-0001-MFG","171.2050mm","30.6600mm","0","CONN RCP USB2.0 C 6+18P SMD RA"
+"D4","RED","TopLayer","LED_0603_RED","162.4250mm","41.5750mm","0","LED 0603 RED SMD"
+"D3","WHITE","TopLayer","LED_0603_YELLOW","164.5000mm","26.7500mm","0","LED 0603 WHITE SMD"
+"D2","SMF5.0AT1G","TopLayer","ONSC-SOD-123FL-2-498_V","161.9500mm","29.9000mm","0","200 W Transient Voltage Suppressor, 2-Pin SOD-123FL, Pb-Free, Tape and Reel"
+"D1","SMF6.0AT1G","TopLayer","ONSC-SOD-123FL-2-498_V","164.9500mm","33.4250mm","270","200 W Transient Voltage Suppressor, 2-Pin SOD-123FL, Pb-Free, Tape and Reel"
+"C6","100nF","TopLayer","CAP_0402","169.7250mm","36.7250mm","180","Capacitor SMD 0402"
+"C5","22uF","TopLayer","CAP_0603","171.7250mm","37.5000mm","270","Capacitor SMD 0603"
+"C2","22uF","TopLayer","CAP_0603","161.5000mm","28.1250mm","0","Capacitor SMD 0603"
+"C3","100nF","TopLayer","CAP_0402","175.1750mm","41.3500mm","0","Capacitor SMD 0402"
+"C1","100nF","TopLayer","CAP_0402","161.1500mm","26.5500mm","0","Capacitor SMD 0402"
+"C4","47uF","TopLayer","CAP_0805","164.9750mm","38.4070mm","270","Capacitor SMD 0805"

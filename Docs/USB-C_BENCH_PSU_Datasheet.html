@@ -1,0 +1,348 @@
+<!--
+  USB-C Bench PSU — Datasheet
+  ------------------------------------------------
+  HOW TO EDIT:   Open this file in any text editor. All content is plain HTML.
+  HOW TO EXPORT: Open in a browser, Ctrl/Cmd+P, "Save as PDF", margins = None/Default.
+  THEME COLORS:  Edit the CSS variables in the :root block below.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>USB-C Bench PSU — Datasheet</title>
+<style>
+  :root {
+    --navy:        #1a1f36;
+    --header-bg:   #1e293b;
+    --accent:      #0066cc;
+    --green:       #059669;
+    --red:         #dc2626;
+    --text:        #111827;
+    --muted:       #6b7280;
+    --border:      #d1d5db;
+    --alt-row:     #f8fafc;
+    --page-w:      210mm;
+    --page-pad:    15mm;
+    --body-font:   "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #e5e7eb;
+    font-family: var(--body-font);
+    color: var(--text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---- Page sheets ---- */
+  .page {
+    width: var(--page-w);
+    min-height: 297mm;
+    margin: 12px auto;
+    background: #fff;
+    padding: 0 var(--page-pad) var(--page-pad);
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  /* ---- Header banner ---- */
+  .banner {
+    background: var(--navy);
+    color: #fff;
+    margin: 0 calc(-1 * var(--page-pad)) 5mm;
+    padding: 7mm var(--page-pad) 6mm;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+  }
+  .banner h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.3px; }
+  .banner .sub { margin: 4px 0 0; font-size: 9.5px; font-weight: 400; opacity: 0.92; }
+  .rev-badge {
+    position: absolute; top: 7mm; right: var(--page-pad);
+    background: var(--accent); color: #fff;
+    font-size: 9px; font-weight: 700;
+    padding: 4px 12px; border-radius: 4px;
+  }
+
+  /* ---- Section titles ---- */
+  .section { font-size: 13px; font-weight: 700; color: var(--navy);
+    display: inline-block; border-bottom: 1.5px solid var(--accent);
+    padding-bottom: 2px; margin: 5mm 0 2mm; }
+  .note { font-size: 7.5px; font-style: italic; color: var(--muted); margin: -1mm 0 1.5mm; }
+
+  p.desc { font-size: 9px; line-height: 1.55; margin: 0 0 2mm; }
+
+  /* ---- Feature list ---- */
+  .features { list-style: none; padding: 0; margin: 0; }
+  .features li { font-size: 8px; margin-bottom: 2.4mm; line-height: 1.3; }
+  .features .ft { color: var(--accent); font-weight: 700; }
+  .features .fd { color: var(--muted); }
+
+  /* ---- Tables ---- */
+  table { width: 100%; border-collapse: collapse; margin: 0 0 3mm; }
+  thead th {
+    background: var(--header-bg); color: #fff;
+    font-size: 8px; font-weight: 700; text-align: left;
+    padding: 3.5px 5px; border: 0.4px solid var(--border);
+  }
+  tbody td {
+    font-size: 7.5px; padding: 3px 5px;
+    border: 0.4px solid var(--border); color: var(--text);
+  }
+  tbody tr:nth-child(even) { background: var(--alt-row); }
+  td.c, th.c { text-align: center; }
+
+  /* ---- Block diagram ---- */
+  .diagram { border: 0.5px solid var(--border); border-radius: 4px;
+    background: #fafbfc; padding: 6mm 4mm 4mm; margin-top: 1mm; }
+  .blocks { display: flex; align-items: center; justify-content: center;
+    gap: 0; font-size: 7px; }
+  .blk { border-radius: 3px; padding: 5px 6px; text-align: center;
+    border: 0.8px solid; min-width: 70px; }
+  .blk .t { font-weight: 700; color: var(--navy); display: block; }
+  .blk .s { font-size: 6px; color: var(--muted); display: block; margin-top: 1px; }
+  .blk-usb { background: #dbeafe; border-color: var(--accent); }
+  .blk-fuse { background: #fef3c7; border-color: #d97706; }
+  .blk-5v { background: #dcfce7; border-color: var(--green); }
+  .blk-3v3 { background: #fce7f3; border-color: var(--red); }
+  .arrow { color: var(--muted); font-size: 12px; padding: 0 4px; }
+  .rail-col { display: flex; flex-direction: column; gap: 10px; }
+  .rail { display: flex; align-items: center; gap: 0; }
+  .out-5v { color: var(--green); font-weight: 700; font-size: 8px; padding-left: 6px; }
+  .out-3v3 { color: var(--red); font-weight: 700; font-size: 8px; padding-left: 6px; }
+  .diagram-cap { text-align: center; font-style: italic; font-size: 6.5px;
+    color: var(--muted); margin-top: 5mm; }
+
+  /* ---- App info ---- */
+  .appblock { margin-bottom: 1.5mm; }
+  .appblock h3 { font-size: 8.5px; color: var(--navy); margin: 0 0 1mm; }
+  .appblock p { font-size: 7.5px; line-height: 1.5; margin: 0; color: var(--text); }
+
+  /* ---- Ordering ---- */
+  .order p { font-size: 8px; margin: 0 0 1.5mm; }
+  .order a { color: var(--accent); font-weight: 700; text-decoration: none; }
+
+  /* ---- Footer ---- */
+  .footer { position: absolute; bottom: 8mm; left: var(--page-pad); right: var(--page-pad);
+    border-top: 0.5px solid var(--border); padding-top: 2mm;
+    display: flex; justify-content: space-between;
+    font-size: 7px; color: var(--muted); }
+
+  /* ---- Two-column layout helper ---- */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+
+  /* ---- Print rules ---- */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="banner">
+    <h1>USB-C Bench PSU</h1>
+    <p class="sub">Compact Dual-Rail Power Supply &nbsp;|&nbsp; 3.3V &amp; 5V &nbsp;|&nbsp; USB-C Input &nbsp;|&nbsp; Fully Analogue</p>
+    <span class="rev-badge">Rev 1.0</span>
+  </div>
+
+  <p class="desc">
+    The USB-C Bench PSU is a compact, open-source power supply board that converts USB-C 5V input into
+    regulated 3.3V and passthrough 5V output rails. It requires no firmware or configuration; connect
+    USB-C power and select your output rail with the onboard slide switch. Designed for breadboard
+    prototyping and benchtop use.
+  </p>
+
+  <div class="section">Key Features</div>
+  <ul class="features">
+    <li><span class="ft">Fully analogue</span> <span class="fd">— No microcontroller, no firmware, instant-on operation</span></li>
+    <li><span class="ft">USB-C input</span> <span class="fd">— 5.1k CC pulldowns for proper 5V enumeration at up to 3A</span></li>
+    <li><span class="ft">Dual output rails</span> <span class="fd">— Regulated 3.3V (TPS563201 buck) + 5V passthrough</span></li>
+    <li><span class="ft">Output switching</span> <span class="fd">— P-channel MOSFETs controlled by SPDT slide switch</span></li>
+    <li><span class="ft">Input protection</span> <span class="fd">— Resettable PTC fuse (2A hold / 3.5A trip)</span></li>
+    <li><span class="ft">ESD protection</span> <span class="fd">— SMF5.0/6.0A TVS diodes on output rails</span></li>
+    <li><span class="ft">LED indicators</span> <span class="fd">— White LED (5V active), Red LED (3.3V active)</span></li>
+    <li><span class="ft">JLCPCB ready</span> <span class="fd">— All SMD parts on LCSC, top-side assembly only</span></li>
+  </ul>
+
+  <div class="twocol">
+    <div>
+      <div class="section">Absolute Maximum Ratings</div>
+      <table>
+        <thead><tr><th>Parameter</th><th class="c">Min</th><th class="c">Max</th><th class="c">Unit</th></tr></thead>
+        <tbody>
+          <tr><td>Input voltage (VBUS)</td><td class="c">-0.3</td><td class="c">6.0</td><td class="c">V</td></tr>
+          <tr><td>Input current (continuous)</td><td class="c">—</td><td class="c">3.0</td><td class="c">A</td></tr>
+          <tr><td>Output current, 3.3V rail (continuous)</td><td class="c">—</td><td class="c">2.0</td><td class="c">A</td></tr>
+          <tr><td>Output current, 3.3V rail (peak)</td><td class="c">—</td><td class="c">3.0</td><td class="c">A</td></tr>
+          <tr><td>Output current, 5V rail (continuous)</td><td class="c">—</td><td class="c">2.0</td><td class="c">A</td></tr>
+          <tr><td>Output current, 5V rail (peak)</td><td class="c">—</td><td class="c">3.0</td><td class="c">A</td></tr>
+          <tr><td>Operating temperature</td><td class="c">-20</td><td class="c">+70</td><td class="c">&deg;C</td></tr>
+          <tr><td>Storage temperature</td><td class="c">-40</td><td class="c">+85</td><td class="c">&deg;C</td></tr>
+          <tr><td>ESD tolerance (HBM)</td><td class="c">—</td><td class="c">2000</td><td class="c">V</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="section">Electrical Characteristics</div>
+      <p class="note">VIN = 5V, TA = 25&deg;C, unless otherwise noted</p>
+      <table>
+        <thead><tr><th>Parameter</th><th class="c">Min</th><th class="c">Typ</th><th class="c">Max</th><th class="c">Unit</th></tr></thead>
+        <tbody>
+          <tr><td>Input voltage</td><td class="c">4.5</td><td class="c">5.0</td><td class="c">5.5</td><td class="c">V</td></tr>
+          <tr><td>3.3V output (no load)</td><td class="c">3.234</td><td class="c">3.3</td><td class="c">3.366</td><td class="c">V</td></tr>
+          <tr><td>3.3V output (1A load)</td><td class="c">3.17</td><td class="c">3.24</td><td class="c">3.3</td><td class="c">V</td></tr>
+          <tr><td>3.3V output (2A load)</td><td class="c">3.04</td><td class="c">3.17</td><td class="c">3.24</td><td class="c">V</td></tr>
+          <tr><td>5V output (no load)</td><td class="c">—</td><td class="c">VBUS</td><td class="c">—</td><td class="c">V</td></tr>
+          <tr><td>5V output (2A load)</td><td class="c">4.80</td><td class="c">4.89</td><td class="c">—</td><td class="c">V</td></tr>
+          <tr><td>MOSFET Rds(on) Q1,Q2</td><td class="c">—</td><td class="c">53</td><td class="c">85</td><td class="c">m&Omega;</td></tr>
+          <tr><td>Switching frequency</td><td class="c">—</td><td class="c">560</td><td class="c">—</td><td class="c">kHz</td></tr>
+          <tr><td>PTC hold / trip current</td><td class="c">—</td><td class="c">2.0/3.5</td><td class="c">—</td><td class="c">A</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Output voltages under load include voltage drop across Q1/Q2 MOSFET Rds(on). Feedback divider senses pre-MOSFET voltage; output drop is unregulated and load-dependent.</p>
+    </div>
+  </div>
+
+  <div class="section">Functional Block Diagram</div>
+  <div class="diagram">
+    <div class="blocks">
+      <div class="blk blk-usb"><span class="t">USB-C</span><span class="s">J1 + R1/R2</span></div>
+      <span class="arrow">&rarr;</span>
+      <div class="blk blk-fuse"><span class="t">PTC Fuse</span><span class="s">F1</span></div>
+      <span class="arrow">&rarr;</span>
+      <div class="rail-col">
+        <div class="rail">
+          <div class="blk blk-5v"><span class="t">MOSFET</span><span class="s">Q2 (5V)</span></div>
+          <span class="out-5v">&rarr; 5V OUT</span>
+        </div>
+        <div class="rail">
+          <div class="blk blk-3v3"><span class="t">TPS563201</span><span class="s">Buck 3.3V</span></div>
+          <span class="arrow">&rarr;</span>
+          <div class="blk blk-3v3"><span class="t">MOSFET</span><span class="s">Q1 (3.3V)</span></div>
+          <span class="out-3v3">&rarr; 3.3V OUT</span>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-cap">S1 (SPDT) controls Q1/Q2 gate drive</div>
+  </div>
+
+  <div class="footer">
+    <span>USB-C Bench PSU Datasheet &nbsp;|&nbsp; CERN-OHL-S-2.0 &nbsp;|&nbsp; Open Source Hardware</span>
+    <span>Page 1 of 2</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="banner">
+    <h1>USB-C Bench PSU</h1>
+    <p class="sub">Compact Dual-Rail Power Supply &nbsp;|&nbsp; 3.3V &amp; 5V &nbsp;|&nbsp; USB-C Input &nbsp;|&nbsp; Fully Analogue</p>
+    <span class="rev-badge">Rev 1.0</span>
+  </div>
+
+  <div class="section">Bill of Materials</div>
+  <table>
+    <thead><tr><th>Ref</th><th>Description</th><th>Value</th><th>Package</th><th>LCSC #</th><th class="c">Qty</th></tr></thead>
+    <tbody>
+      <tr><td>IC1</td><td>Synchronous buck converter</td><td>TPS563201</td><td>SOT-23-6</td><td>C116592</td><td class="c">1</td></tr>
+      <tr><td>J1</td><td>USB-C receptacle (6-pin)</td><td>217175-0001</td><td>SMD</td><td>C668623</td><td class="c">1</td></tr>
+      <tr><td>L1</td><td>Power inductor</td><td>3.3&micro;H</td><td>1008</td><td>C5832373</td><td class="c">1</td></tr>
+      <tr><td>Q1, Q2</td><td>P-channel MOSFET</td><td>AO3401A</td><td>SOT-23</td><td>C15127</td><td class="c">2</td></tr>
+      <tr><td>F1</td><td>Resettable PTC fuse</td><td>2A / 3.5A</td><td>1206</td><td>C2685749</td><td class="c">1</td></tr>
+      <tr><td>S1</td><td>SPDT slide switch</td><td>SS12D07VG4</td><td>TH</td><td>C2939726</td><td class="c">1</td></tr>
+      <tr><td>D1</td><td>TVS diode</td><td>SMF6.0A</td><td>SOD-123FL</td><td>C2857264</td><td class="c">1</td></tr>
+      <tr><td>D2</td><td>TVS diode</td><td>SMF5.0A</td><td>SOD-123FL</td><td>C2857263</td><td class="c">1</td></tr>
+      <tr><td>D3</td><td>White LED</td><td>—</td><td>0603</td><td>C2290</td><td class="c">1</td></tr>
+      <tr><td>D4</td><td>Red LED</td><td>—</td><td>0603</td><td>C2286</td><td class="c">1</td></tr>
+      <tr><td>C4</td><td>Input capacitor</td><td>47&micro;F</td><td>0805</td><td>C19103846</td><td class="c">1</td></tr>
+      <tr><td>C2, C5</td><td>Decoupling capacitor</td><td>22&micro;F</td><td>0603</td><td>C20416425</td><td class="c">3</td></tr>
+      <tr><td>C1, C3, C6</td><td>Bypass/Decoupling capacitor</td><td>100nF</td><td>0402</td><td>C1525</td><td class="c">3</td></tr>
+      <tr><td>R1, R2</td><td>CC pulldown resistor</td><td>5.1k&Omega;</td><td>0402</td><td>C25905</td><td class="c">2</td></tr>
+      <tr><td>R3, R6, R7</td><td>Gate pull-up resistor</td><td>100k&Omega;</td><td>0402</td><td>C25741</td><td class="c">3</td></tr>
+      <tr><td>R4</td><td>Feedback divider (top)</td><td>33.2k&Omega;</td><td>0402</td><td>C2930001</td><td class="c">1</td></tr>
+      <tr><td>R5</td><td>Feedback divider (bottom)</td><td>10k&Omega;</td><td>0402</td><td>C25744</td><td class="c">1</td></tr>
+      <tr><td>R8</td><td>LED resistor (5V rail)</td><td>330&Omega;</td><td>0402</td><td>C25104</td><td class="c">1</td></tr>
+      <tr><td>R9</td><td>LED resistor (3.3V rail)</td><td>220&Omega;</td><td>0402</td><td>C25091</td><td class="c">1</td></tr>
+      <tr><td>JMP1</td><td>Configuration jumper</td><td>—</td><td>2-pin TH</td><td>—</td><td class="c">1</td></tr>
+    </tbody>
+  </table>
+  <p class="note">All SMD parts are available as JLCPCB basic or extended parts. S1 and JMP1 are through-hole.</p>
+
+  <div class="section" style="color: var(--red);">&#9888; Important Safety Warning</div>
+  <div class="appblock" style="border-left: 3px solid var(--red); padding-left: 4mm; margin-bottom: 5mm;">
+    <h3>Disconnect loads before switching output voltage</h3>
+    <p>Both MOSFET drains share a common output node. When the 5V rail is selected, Q1's body diode
+    forward-biases and holds the 3.3V regulator output at approximately 4.3V (5V minus the body diode
+    drop). When switching from 5V to 3.3V mode, the output will momentarily remain near 5V until the
+    output capacitors discharge through the connected load. This transient can exceed the absolute
+    maximum voltage rating of 3.3V devices and cause permanent damage.</p>
+    <p><strong>Always disconnect or power-off loads before changing the output voltage selection.</strong>
+    Switching from 3.3V to 5V mode does not have this issue, as Q2's body diode is reverse-biased
+    in that direction.</p>
+  </div>
+
+  <div class="section">Application Information</div>
+
+  <div class="appblock">
+    <h3>USB-C Compatibility</h3>
+    <p>The board uses 5.1k&Omega; CC pulldown resistors (R1, R2) for USB-C enumeration. This requests the default
+    5V power profile without PD negotiation. Works with any USB-C charger or host port. For reliable operation,
+    use a USB-C to USB-C cable. <b>NOTE: </b> some cheap USB-C to USB-A cables omit CC wires, which may limit available
+    current to 500mA.</p>
+  </div>
+
+  <div class="appblock">
+    <h3>3.3V Regulation</h3>
+    <p>The TPS563201 operates as a synchronous buck converter at ~560kHz with internal compensation. The
+    feedback divider (R4 = 33.2k&Omega;, R5 = 10k&Omega;) sets the output: Vout = 0.765V &times; (1 + R4/R5) = 3.30V.
+    The 3.3&micro;H inductor (L1) and output capacitors provide filtering and energy storage.</p>
+  </div>
+
+  <div class="appblock">
+    <h3>Output Switching</h3>
+    <p>Both output rails are gated by AO3401A P-channel MOSFETs (Q1, Q2). The SPDT slide switch (S1) drives
+    the MOSFET gates via 100k&Omega; pull-up resistors (R3, R8, R9). When a rail is disabled, the gate is pulled
+    high (Vgs = 0V) and the MOSFET is off.</p>
+  </div>
+
+  <div class="appblock">
+    <h3>Protection</h3>
+    <p>F1 is a resettable PTC fuse on the VBUS rail protecting against short circuits and overcurrent faults.
+    D1 and D2 are unidirectional TVS diodes clamping transients on the output rails. The TVS clamp voltage is
+    6.4V (typ) at 1A.</p>
+  </div>
+
+  <div class="appblock">
+    <h3>LED Indicators</h3>
+    <p>D3 (white, R6 = 330&Omega;) indicates the 5V rail is active. D4 (red, R7 = 220&Omega;) indicates the 3.3V
+    rail is active. Both LEDs draw approximately 5mA at their nominal operating points.</p>
+  </div>
+
+  <div class="appblock">
+  <h3>Footprint</h3>
+  <p>Board footprint is extremely compact, fitting in a 22mm x 17mm rectangle.</p>
+  </div>
+
+  <div class="section">Ordering &amp; License</div>
+  <div class="order">
+    <p>This is an open-source hardware project licensed under CERN-OHL-S-2.0. Design files, Gerbers, BOM,
+    and pick-and-place data are available at:</p>
+    <p><a href="https://github.com/TheRealEuaX/usb-c-bench-psu">github.com/TheRealEuaX/usb-c-bench-psu</a></p>
+    <p class="note">Manufactured boards for purchase coming soon.</p>
+  </div>
+
+  <div class="footer">
+    <span>USB-C Bench PSU Datasheet &nbsp;|&nbsp; CERN-OHL-S-2.0 &nbsp;|&nbsp; Open Source Hardware</span>
+    <span>Page 2 of 2</span>
+  </div>
+</section>
+
+</body>
+</html>
